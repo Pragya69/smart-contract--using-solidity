@@ -29,26 +29,35 @@ Start a new file in the code editor within Remix. Copy and paste the following c
 pragma solidity ^0.8.0;contract SmartContract {
     uint public value;
     
-    function setValue(uint _value) public {
-        // require statement
-        require(_value > 0, "Value must be greater than zero");
-        
-        // assert statement
-        assert(_value != 42);
-        
-        // set the value
-        value = _value;
+   function setAmount(uint _amount) public {
+        require(_amount > 0, "Amount must be greater than zero");
+        assert(_amount != 25);
+        amount = _amount;
     }
-    
-    function setValueWithRevert(uint _value) public {
-        if (_value == 0) { // revert statement
+
+    // Function with revert statement
+    function setAmountWithRevert(uint _amount) public {
+        if (_amount == 0) {
             revert("Value cannot be zero");
         }
-        
-        value = _value;
+        amount = _amount;
+    }
+
+    // Function with require statement that checks for even number
+    function setEvenValue(uint _amount) public {
+        require(_amount % 2 == 0, "Amount must be even");
+        assert(_amount!= 25);
+        amount = _amount;
+    }
+
+    // Function with revert statement if value is negative
+    function setAmountPositive(uint _amount) public {
+        if (_amount < 0) {
+            revert("Value must be non-negative");
+        }
+        amount = _amount;
     }
 }
-
 
 
 # Purpose
